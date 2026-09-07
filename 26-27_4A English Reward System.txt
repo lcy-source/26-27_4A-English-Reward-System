@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>26-27 Class 4A Good Behaviour</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --comic-red: #ED1D24;
+            --comic-yellow: #FFDE00;
+            --comic-blue: #00AEEF;
+            --comic-orange: #FF6600;
+            --border-black: #000000;
+            --font-comic: 'Comic Sans MS', 'Comic Neue', cursive, sans-serif;
+        }
+
+        * {
+            font-family: var(--font-comic) !important;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #72CFF9;
+            background-image: radial-gradient(var(--comic-blue) 20%, transparent 20%);
+            background-size: 16px 16px;
+            color: var(--border-black);
+            margin: 0;
+            padding: 10px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .title-burst {
+            display: inline-block;
+            background: var(--comic-yellow);
+            border: 3px solid var(--border-black);
+            padding: 8px 20px;
+            box-shadow: 5px 5px 0px var(--border-black);
+            transform: rotate(-1deg);
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--comic-red);
+            text-shadow: 2px 2px 0px var(--comic-yellow), -1px -1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000, 1px 1px 0px #000;
+            letter-spacing: 1px;
+            margin: 0;
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            font-weight: bold;
+            background-color: var(--comic-red);
+            color: white;
+            display: inline-block;
+            padding: 3px 10px;
+            border: 2px solid var(--border-black);
+            box-shadow: 3px 3px 0px var(--border-black);
+            transform: rotate(1deg);
+            margin-top: 5px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .tab-btn {
+            font-size: 15px;
+            font-weight: bold;
+            padding: 6px 12px;
+            border: 3px solid var(--border-black);
+            background-color: #FFF;
+            color: var(--border-black);
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px var(--border-black);
+            transition: 0.1s;
+        }
+
+        .tab-btn.active {
+            background-color: var(--comic-yellow);
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px var(--border-black);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .toolbar {
+            background: #FFF;
+            border: 3px solid var(--border-black);
+            box-shadow: 4px 4px 0px var(--border-black);
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        /* ?êË®≠Ôº? ??(Columns) 2 Ë°?(Rows) Â±ïÁ§∫ */
+        .group-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .group-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+        }
+
+        .group-card {
+            background-color: #FFF;
+            border: 3px solid var(--border-black);
+            border-radius: 12px;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 4px 4px 0px var(--border-black);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .group-card:nth-child(1) { background-color: #FF6B6B; }
+        .group-card:nth-child(2) { background-color: #FFD166; }
+        .group-card:nth-child(3) { background-color: #06D6A0; }
+        .group-card:nth-child(4) { background-color: #118AB2; color: white; }
+        .group-card:nth-child(5) { background-color: #FF9F1C; }
+        .group-card:nth-child(6) { background-color: #9B5DE5; color: white; }
+
+        .group-title {
+            font-size: 16px;
+            font-weight: bold;
+            text-shadow: 1px 1px 0px #000;
+            color: #FFF;
+            word-break: break-word;
+            line-height: 1.2;
+        }
+
+        .score-display-box {
+            background: #FFF;
+            border: 2px solid #000;
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 8px;
+            margin: 5px auto;
+            box-shadow: 2px 2px 0px #000;
+            width: fit-content;
+        }
+
+        .score-display {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--comic-red);
+            line-height: 1;
+        }
+
+        .comic-btn {
+            font-size: 13px;
+            font-weight: bold;
+            padding: 3px 6px;
+            border: 2px solid var(--border-black);
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 2px 2px 0px var(--border-black);
+            transition: 0.1s;
+        }
+
+        .comic-btn:active {
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0px var(--border-black);
+        }
+
+        .edit-title-btn {
+            background: #FFF;
+            color: #000;
+            border: 2px solid #000;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 13px;
+            padding: 6px 12px;
+            margin-top: 15px;
+            box-shadow: 3px 3px 0px #000;
+            display: block;
+            width: 100%;
+        }
+
+        .btn-add { background-color: #06D6A0; color: white; }
+        .btn-minus { background-color: var(--comic-red); color: white; }
+        .btn-settle { background-color: var(--comic-yellow); color: black; font-size: 13px; }
+
+        /* ?ã‰∫∫?ÜÊï∏Ë°®Ê†º */
+        .student-controls {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .student-controls input, .student-controls select {
+            padding: 6px;
+            font-size: 14px;
+            border: 2px solid var(--border-black);
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: white;
+            border: 3px solid var(--border-black);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 4px 4px 0px var(--border-black);
+        }
+
+        th, td {
+            padding: 8px 10px;
+            text-align: left;
+            border-bottom: 2px solid var(--border-black);
+            border-right: 2px solid var(--border-black);
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: var(--comic-yellow);
+            font-size: 15px;
+        }
+
+        select.group-select {
+            padding: 4px;
+            font-weight: bold;
+            border: 2px solid black;
+            border-radius: 6px;
+            background: #F0F0F0;
+        }
+
+        /* Rewards ?ÅÈù¢ - 601px ‰ª•‰???3??2Ë°?*/
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .shop-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+        }
+
+        .reward-card {
+            background: white;
+            border: 3px solid var(--border-black);
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 4px 4px 0px var(--border-black);
+            text-align: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .reward-icon { font-size: 32px; margin-bottom: 3px; }
+        .reward-title { font-size: 16px; font-weight: bold; color: var(--comic-red); }
+        .reward-desc { font-size: 12px; font-weight: bold; color: #333; margin-bottom: 8px; }
+
+        .reward-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+
+        .reward-cost {
+            background: var(--comic-yellow);
+            border: 2px solid black;
+            padding: 2px 6px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: bold;
+            box-shadow: 2px 2px 0px black;
+        }
+
+        /* Modal ÂΩàÂá∫Ë¶ñÁ? */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-box {
+            background: white;
+            border: 4px solid black;
+            border-radius: 12px;
+            padding: 20px;
+            width: 90%;
+            max-width: 420px;
+            box-shadow: 6px 6px 0px black;
+            text-align: center;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--comic-red);
+            margin-bottom: 12px;
+        }
+
+        .modal-info {
+            background: #FFF9C4;
+            border: 2px solid black;
+            padding: 8px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .modal-input-group {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        .modal-input-group label {
+            display: block;
+            font-weight: bold;
+            font-size: 12px;
+            margin-bottom: 3px;
+        }
+
+        .modal-input-group input, .modal-input-group textarea {
+            width: 100%;
+            padding: 6px;
+            border: 2px solid black;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="title-burst">
+            <h1>26-27 Class 4A Good Behaviour</h1>
+        </div>
+        <div>
+            <div class="subtitle">?í• SUPER BEHAVIOUR REWARD SYSTEM ?í•</div>
+        </div>
+    </header>
+
+    <!-- Tab Buttons -->
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab('tab-group', this)">??Group Competition</button>
+        <button class="tab-btn" onclick="switchTab('tab-students', this)">?ë§ Student Records</button>
+        <button class="tab-btn" onclick="switchTab('tab-rewards', this)">?? Rewards</button>
+    </div>
+
+    <!-- TAB 1: 6 Groups Competition -->
+    <div id="tab-group" class="tab-content active">
+        <div class="toolbar">
+            <span style="font-size: 16px; font-weight:bold; color: var(--comic-red);">?î• HERO BATTLE</span>
+            <div>
+                <button class="comic-btn btn-settle" onclick="settleScoresToStudents()">??Settle (ÁµêÁ?)</button>
+                <button class="comic-btn" style="background:#CCC; font-size:12px;" onclick="resetGroupScores()">Reset</button>
+            </div>
+        </div>
+        <div class="group-grid" id="groupContainer"></div>
+        <button class="edit-title-btn" onclick="openEditAllGroupsModal()">?èÔ? Edit All Group Names (‰øÆÊîπ?Ä?âÁ??•Â?Á®?</button>
+    </div>
+
+    <!-- TAB 2: Individual Student Records -->
+    <div id="tab-students" class="tab-content">
+        <div class="toolbar">
+            <div class="student-controls">
+                <input type="text" id="studentNameInput" placeholder="Student Name..." style="flex-grow: 2;">
+                <select id="studentGroupInput" style="flex-grow: 1;">
+                    <option value="0">Group 1</option>
+                    <option value="1">Group 2</option>
+                    <option value="2">Group 3</option>
+                    <option value="3">Group 4</option>
+                    <option value="4">Group 5</option>
+                    <option value="5">Group 6</option>
+                </select>
+                <button class="comic-btn btn-add" onclick="addStudent()">+ Add</button>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Group</th>
+                    <th>Points</th>
+                    <th>Quick Adjust</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="studentTableBody">
+                <!-- JS Populated -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- TAB 3: Rewards Shop -->
+    <div id="tab-rewards" class="tab-content">
+        <div class="shop-grid" id="rewardsContainer"></div>
+    </div>
+</div>
+
+<!-- Modal 1: ?õÈ?ÂΩàÂá∫Ë¶ñÁ? -->
+<div class="modal-overlay" id="redeemModal">
+    <div class="modal-box">
+        <div class="modal-title" id="modalRewardTitle">Redeem Reward</div>
+        <div class="modal-info">
+            Cost: <span id="modalRewardCost" style="color:var(--comic-red); font-size:18px; font-weight:bold;">0</span> PTS
+        </div>
+        
+        <div style="text-align:left; margin-bottom:12px;">
+            <label style="font-weight:bold; display:block; margin-bottom:4px; font-size:13px;">Select Student (?∏Ê?Â≠∏Á?):</label>
+            <select id="modalStudentSelect" onchange="updateModalStudentInfo()" style="width:100%; padding:8px; font-size:14px; border:2px solid black; border-radius:6px; font-weight:bold;">
+                <!-- JS Populated -->
+            </select>
+        </div>
+
+        <div id="modalStudentScoreDisplay" style="font-size:14px; font-weight:bold; margin-bottom:15px; color:#003366;">
+            Current Points: -
+        </div>
+
+        <div style="display:flex; justify-content:center; gap:8px;">
+            <button class="comic-btn btn-add" onclick="confirmRedeem()">Confirm</button>
+            <button class="comic-btn" style="background:#CCC;" onclick="closeModal('redeemModal')">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 2: ?πÈ?‰øÆÊîπÁµÑÂà•?çÁ®± -->
+<div class="modal-overlay" id="editGroupsModal">
+    <div class="modal-box">
+        <div class="modal-title">Edit Group Names (ÁµÑÂà•?çÁ®±)</div>
+        <div id="editGroupsInputsContainer"></div>
+        <div style="display:flex; justify-content:center; gap:8px; margin-top:12px;">
+            <button class="comic-btn btn-add" onclick="saveAllGroupNames()">Save Changes</button>
+            <button class="comic-btn" style="background:#CCC;" onclick="closeModal('editGroupsModal')">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 3: ‰øÆÊîπ?éÂãµ?ßÂÆπ -->
+<div class="modal-overlay" id="editRewardModal">
+    <div class="modal-box">
+        <div class="modal-title">Edit Reward Item (‰øÆÊîπ?éÂãµ)</div>
+        
+        <div class="modal-input-group">
+            <label>Title (?éÂãµ?çÁ®±):</label>
+            <input type="text" id="editRewardTitleInput">
+        </div>
+        <div class="modal-input-group">
+            <label>Description (?èËø∞):</label>
+            <textarea id="editRewardDescInput" rows="2"></textarea>
+        </div>
+        <div class="modal-input-group">
+            <label>Cost Points (?õÈ??ÜÊï∏):</label>
+            <input type="number" id="editRewardCostInput" min="0">
+        </div>
+
+        <div style="display:flex; justify-content:center; gap:8px; margin-top:15px;">
+            <button class="comic-btn btn-add" onclick="saveRewardEdit()">Save Changes</button>
+            <button class="comic-btn" style="background:#CCC;" onclick="closeModal('editRewardModal')">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- Data Storage ---
+    let groupNames = JSON.parse(localStorage.getItem('comicGroupNames')) || [
+        "Group 1 (Lions)", "Group 2 (Tigers)", "Group 3 (Eagles)", 
+        "Group 4 (Dolphins)", "Group 5 (Pandas)", "Group 6 (Dragons)"
+    ];
+    
+    let groupScores = JSON.parse(localStorage.getItem('comicGroupScores')) || [0, 0, 0, 0, 0, 0];
+    
+    let students = JSON.parse(localStorage.getItem('comicStudents')) || [
+        { id: 1, name: "Chris Wong", groupIndex: 0, points: 50 },
+        { id: 2, name: "Mary Chan", groupIndex: 1, points: 35 }
+    ];
+
+    const defaultRewards = [
+        { id: 1, icon: "??", title: "Teacher's Helper", desc: "?∂‰??•Ëã±?áÁ?Â∞èÂπ´?ãÔ?Âπ´Â??ºÂñÆÂºµ„ÄÅÊî∂?üË™≤?ÅÊì¶ÈªëÊùøÔº?, cost: 50 },
+        { id: 2, icon: "??", title: "Seat Choice Pass", desc: "?™Áî±?∏Â∫ßÊ¨äÔ??ØÈÅ∏?áÂ•Ω?ãÂ??åÂ?‰∏Ä?üÊ?Ôº?, cost: 100 },
+        { id: 3, icon: "?éµ", title: "English Song DJ", desc: "ÈªûÊ?Ê¨äÔ??®Ë™≤?çÊ?Â∞èÊÅØ?∫ÂÖ®?≠Êí≠?æÂ?Ê≠°Á??±Ê?Ê≠?, cost: 40 },
+        { id: 4, icon: "??, title: "Homework Extension", desc: "?üË™≤Âª∂Ê??°Ô??ØÂ?‰∏ÄÊ¨°Â?Ë™≤ÂØ¨?êÂª∂?≤‰?Â§©È?‰∫?, cost: 120 },
+        { id: 5, icon: "?é®", title: "Hero Badge Sticker", desc: "?≤Â??ÅÂ∏´Â∞àÂ±¨Áπ™Ë£Ω?ñÂç∞Ë£ΩÁ?ÁæéÂ??±È?Ë≤ºÁ? / ?πÊ?Á®±Ë?", cost: 30 },
+        { id: 6, icon: "?ì£", title: "Game Leader", desc: "?î‰ªªË™≤Â? English Game ?Ñ‰∏ª?ÅÊ?‰∏ªÊ?‰∫∫Âä©??, cost: 60 }
+    ];
+
+    let rewardsList = JSON.parse(localStorage.getItem('comicRewardsList')) || defaultRewards;
+
+    let currentSelectedReward = null;
+    let currentEditingRewardId = null;
+
+    // --- Tab Switching ---
+    function switchTab(tabId, btn) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        
+        document.getElementById(tabId).classList.add('active');
+        btn.classList.add('active');
+    }
+
+    // --- Group Management ---
+    function renderGroups() {
+        const container = document.getElementById('groupContainer');
+        container.innerHTML = '';
+        
+        groupScores.forEach((score, index) => {
+            const card = document.createElement('div');
+            card.className = 'group-card';
+            card.innerHTML = `
+                <div>
+                    <div class="group-title">${groupNames[index]}</div>
+                    <div class="score-display-box">
+                        <div class="score-display">${score}</div>
+                    </div>
+                </div>
+                <div>
+                    <div style="display:flex; justify-content:center; gap:4px; margin-bottom: 4px;">
+                        <button class="comic-btn btn-minus" onclick="updateGroupScore(${index}, -1)">-1</button>
+                        <button class="comic-btn btn-add" onclick="updateGroupScore(${index}, 1)">+1</button>
+                        <button class="comic-btn btn-add" style="background:#FF9F1C;" onclick="updateGroupScore(${index}, 5)">+5</button>
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function openEditAllGroupsModal() {
+        const container = document.getElementById('editGroupsInputsContainer');
+        container.innerHTML = '';
+        
+        groupNames.forEach((name, index) => {
+            const div = document.createElement('div');
+            div.className = 'modal-input-group';
+            div.innerHTML = `
+                <label>Group ${index + 1} Name:</label>
+                <input type="text" id="groupInput_${index}" value="${name}">
+            `;
+            container.appendChild(div);
+        });
+        
+        document.getElementById('editGroupsModal').style.display = 'flex';
+    }
+
+    function saveAllGroupNames() {
+        for (let i = 0; i < 6; i++) {
+            const val = document.getElementById(`groupInput_${i}`).value.trim();
+            if (val !== "") {
+                groupNames[i] = val;
+            }
+        }
+        localStorage.setItem('comicGroupNames', JSON.stringify(groupNames));
+        renderGroups();
+        renderStudents();
+        closeModal('editGroupsModal');
+    }
+
+    function updateGroupScore(index, delta) {
+        groupScores[index] += delta;
+        if (groupScores[index] < 0) groupScores[index] = 0;
+        localStorage.setItem('comicGroupScores', JSON.stringify(groupScores));
+        renderGroups();
+    }
+
+    function resetGroupScores() {
+        if(confirm("Reset all group scores to 0?")) {
+            groupScores = [0, 0, 0, 0, 0, 0];
+            localStorage.setItem('comicGroupScores', JSON.stringify(groupScores));
+            renderGroups();
+        }
+    }
+
+    function settleScoresToStudents() {
+        if(confirm("Transfer current group points to all respective students and reset group scores?")) {
+            students.forEach(student => {
+                const gIdx = parseInt(student.groupIndex);
+                if (gIdx >= 0 && gIdx < 6) {
+                    student.points += groupScores[gIdx];
+                }
+            });
+
+            groupScores = [0, 0, 0, 0, 0, 0];
+            saveStudents();
+            localStorage.setItem('comicGroupScores', JSON.stringify(groupScores));
+            
+            renderGroups();
+            renderStudents();
+            alert("POW! Scores successfully settled to individual records!");
+        }
+    }
+
+    // --- Student Management ---
+    function renderStudents() {
+        const tbody = document.getElementById('studentTableBody');
+        tbody.innerHTML = '';
+
+        const addSelect = document.getElementById('studentGroupInput');
+        addSelect.innerHTML = groupNames.map((g, i) => `<option value="${i}">${g}</option>`).join('');
+
+        students.forEach((student, index) => {
+            const tr = document.createElement('tr');
+            
+            let groupOptions = groupNames.map((gName, gIdx) => 
+                `<option value="${gIdx}" ${student.groupIndex == gIdx ? 'selected' : ''}>${gName}</option>`
+            ).join('');
+
+            tr.innerHTML = `
+                <td><strong>${student.name}</strong></td>
+                <td>
+                    <select class="group-select" onchange="changeStudentGroup(${index}, this.value)">
+                        ${groupOptions}
+                    </select>
+                </td>
+                <td><span style="font-size:18px; font-weight:bold; color:var(--comic-red);">${student.points}</span> PTS</td>
+                <td>
+                    <button class="comic-btn btn-add" style="padding:1px 6px; font-size:12px;" onclick="updateStudentScore(${index}, 1)">+1</button>
+                    <button class="comic-btn btn-add" style="padding:1px 6px; font-size:12px; background:#FF9F1C;" onclick="updateStudentScore(${index}, 5)">+5</button>
+                    <button class="comic-btn btn-minus" style="padding:1px 6px; font-size:12px;" onclick="updateStudentScore(${index}, -1)">-1</button>
+                </td>
+                <td>
+                    <button class="comic-btn btn-minus" style="padding:1px 6px; font-size:11px; background:#666;" onclick="deleteStudent(${index})">Delete</button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function addStudent() {
+        const nameInput = document.getElementById('studentNameInput');
+        const groupInput = document.getElementById('studentGroupInput');
+        const name = nameInput.value.trim();
+        
+        if (name) {
+            students.push({
+                id: Date.now(),
+                name: name,
+                groupIndex: parseInt(groupInput.value),
+                points: 0
+            });
+            nameInput.value = '';
+            saveStudents();
+            renderStudents();
+        }
+    }
+
+    function changeStudentGroup(studentIndex, newGroupIndex) {
+        students[studentIndex].groupIndex = parseInt(newGroupIndex);
+        saveStudents();
+    }
+
+    function updateStudentScore(index, delta) {
+        students[index].points += delta;
+        if (students[index].points < 0) students[index].points = 0;
+        saveStudents();
+        renderStudents();
+    }
+
+    function deleteStudent(index) {
+        if (confirm(`Delete student: ${students[index].name}?`)) {
+            students.splice(index, 1);
+            saveStudents();
+            renderStudents();
+        }
+    }
+
+    function saveStudents() {
+        localStorage.setItem('comicStudents', JSON.stringify(students));
+    }
+
+    // --- Rewards Logic ---
+    function renderRewards() {
+        const container = document.getElementById('rewardsContainer');
+        container.innerHTML = '';
+
+        rewardsList.forEach(reward => {
+            const card = document.createElement('div');
+            card.className = 'reward-card';
+            card.innerHTML = `
+                <div>
+                    <div class="reward-icon">${reward.icon}</div>
+                    <div class="reward-title">${reward.title}</div>
+                    <div class="reward-desc">${reward.desc}</div>
+                </div>
+                <div class="reward-footer">
+                    <span class="reward-cost">${reward.cost} PTS</span>
+                    <div>
+                        <button class="comic-btn" style="background:#FFF; font-size:11px;" onclick="openEditRewardModal(${reward.id})">?èÔ? Edit</button>
+                        <button class="comic-btn btn-add" style="font-size:11px;" onclick="openRedeemModal(${reward.id})">?? Redeem</button>
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    // ?õÈ? Modal
+    function openRedeemModal(rewardId) {
+        if (students.length === 0) {
+            alert("No students found! Please add students in 'Student Records' first.");
+            return;
+        }
+
+        currentSelectedReward = rewardsList.find(r => r.id === rewardId);
+        document.getElementById('modalRewardTitle').innerText = `${currentSelectedReward.icon} ${currentSelectedReward.title}`;
+        document.getElementById('modalRewardCost').innerText = currentSelectedReward.cost;
+
+        const select = document.getElementById('modalStudentSelect');
+        select.innerHTML = students.map((s, idx) => `<option value="${idx}">${s.name}</option>`).join('');
+
+        updateModalStudentInfo();
+        document.getElementById('redeemModal').style.display = 'flex';
+    }
+
+    function updateModalStudentInfo() {
+        const select = document.getElementById('modalStudentSelect');
+        const idx = select.value;
+        if (idx !== null && students[idx]) {
+            const currentPoints = students[idx].points;
+            const display = document.getElementById('modalStudentScoreDisplay');
+            
+            if (currentPoints >= currentSelectedReward.cost) {
+                display.innerHTML = `Current Points: <span style="color:#06D6A0; font-size:16px; font-weight:bold;">${currentPoints} PTS</span> (Enough!)`;
+            } else {
+                display.innerHTML = `Current Points: <span style="color:var(--comic-red); font-size:16px; font-weight:bold;">${currentPoints} PTS</span> (Not enough!)`;
+            }
+        }
+    }
+
+    function confirmRedeem() {
+        const select = document.getElementById('modalStudentSelect');
+        const idx = select.value;
+        const student = students[idx];
+
+        if (student.points < currentSelectedReward.cost) {
+            alert(`Insufficient points! ${student.name} needs ${currentSelectedReward.cost - student.points} more points.`);
+            return;
+        }
+
+        if (confirm(`Confirm deducting ${currentSelectedReward.cost} PTS from ${student.name}?`)) {
+            student.points -= currentSelectedReward.cost;
+            saveStudents();
+            renderStudents();
+            closeModal('redeemModal');
+            alert(`Successfully redeemed! Remaining points for ${student.name}: ${student.points} PTS.`);
+        }
+    }
+
+    // ‰øÆÊîπ Reward Modal
+    function openEditRewardModal(rewardId) {
+        currentEditingRewardId = rewardId;
+        const item = rewardsList.find(r => r.id === rewardId);
+        
+        document.getElementById('editRewardTitleInput').value = item.title;
+        document.getElementById('editRewardDescInput').value = item.desc;
+        document.getElementById('editRewardCostInput').value = item.cost;
+
+        document.getElementById('editRewardModal').style.display = 'flex';
+    }
+
+    function saveRewardEdit() {
+        const title = document.getElementById('editRewardTitleInput').value.trim();
+        const desc = document.getElementById('editRewardDescInput').value.trim();
+        const cost = parseInt(document.getElementById('editRewardCostInput').value);
+
+        if (title && !isNaN(cost)) {
+            const item = rewardsList.find(r => r.id === currentEditingRewardId);
+            item.title = title;
+            item.desc = desc;
+            item.cost = cost;
+
+            localStorage.setItem('comicRewardsList', JSON.stringify(rewardsList));
+            renderRewards();
+            closeModal('editRewardModal');
+        } else {
+            alert("Please fill in valid Title and Cost!");
+        }
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = 'none';
+    }
+
+    // Initialize Page
+    renderGroups();
+    renderStudents();
+    renderRewards();
+</script>
+
+</body>
+</html>
